@@ -4,6 +4,7 @@ import { Index as PersonalInfo } from './personal-info/Index'
 import { Index as Plans } from './plans/Index'
 import Card from './UI/Card'
 import Actions from './actions/Index'
+import { Index as AddOns } from './add-ons/Index'
 
 const PageContainer = () => {
     return (
@@ -12,7 +13,8 @@ const PageContainer = () => {
             <section className='px-4 flex flex-col justify-between items-center'>
                 <Card>
                     {/* <PersonalInfo /> */}
-                    <Plans />
+                    {/* <Plans /> */}
+                    <AddOns />
                 </Card>
                 <div className='absolute bottom-0 w-full'>
                     <Actions />
