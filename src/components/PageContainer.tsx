@@ -5,6 +5,7 @@ import { Index as Plans } from './plans/Index'
 import Card from './UI/Card'
 import Actions from './actions/Index'
 import { Index as AddOns } from './add-ons/Index'
+import {Index as Total} from './total/Index'
 
 const PageContainer = () => {
     return (
@@ -14,7 +15,8 @@ const PageContainer = () => {
                 <Card>
                     {/* <PersonalInfo /> */}
                     {/* <Plans /> */}
-                    <AddOns />
+                    {/* <AddOns /> */}
+                    <Total />
                 </Card>
                 <div className='absolute bottom-0 w-full'>
                     <Actions />
