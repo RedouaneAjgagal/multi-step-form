@@ -1,11 +1,13 @@
 import React from 'react'
+import Card from './UI/Card'
+import Actions from './actions/Index'
+
 import { Index as Steps } from './steps/Index'
 import { Index as PersonalInfo } from './personal-info/Index'
 import { Index as Plans } from './plans/Index'
-import Card from './UI/Card'
-import Actions from './actions/Index'
 import { Index as AddOns } from './add-ons/Index'
-import {Index as Total} from './total/Index'
+import { Index as Total } from './total/Index'
+import { Index as Thankyou } from './thank-you/Index'
 
 const PageContainer = () => {
     return (
@@ -16,7 +18,8 @@ const PageContainer = () => {
                     {/* <PersonalInfo /> */}
                     {/* <Plans /> */}
                     {/* <AddOns /> */}
-                    <Total />
+                    {/* <Total /> */}
+                    <Thankyou />
                 </Card>
                 <div className='absolute bottom-0 w-full'>
                     <Actions />
