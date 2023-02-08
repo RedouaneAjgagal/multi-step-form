@@ -12,4 +12,4 @@ const Card: React.FC<Props> = (props) => {
     )
 }
 
-export default Card
+export default Card;
