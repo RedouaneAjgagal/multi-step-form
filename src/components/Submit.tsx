@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useRef, useState } from 'react'
 import Card from './UI/Card'
 // pages
 import { Index as PersonalInfo } from './personal-info/Index'
@@ -16,45 +16,55 @@ import { validForm } from './personal-info/Validation'
 
 
 const Submit = () => {
+    // Display pages
     const { steps } = useAppSelector(state => state.stepReducer);
+    const personalInfoUI = steps.personalInfo && !steps.plans && !steps.addOns && !steps.total && !steps.thankYou;
+    const plansUI = steps.personalInfo && steps.plans && !steps.addOns && !steps.total && !steps.thankYou;
+    const addOnsIU = steps.personalInfo && steps.plans && steps.addOns && !steps.total && !steps.thankYou;
+    const totalUI = steps.personalInfo && steps.plans && steps.addOns && steps.total && !steps.thankYou;
+    const thankYouUI = steps.personalInfo && !steps.plans && !steps.addOns && !steps.total && steps.thankYou;
 
     const nameRef = useRef<HTMLInputElement>(null)
     const emailRef = useRef<HTMLInputElement>(null)
     const phoneRef = useRef<HTMLInputElement>(null)
 
+    const [isError, setIsError] = useState<string[]>([]);
+
     const dispatch = useAppDispatch();
     const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         switch (true) {
-            case steps.personalInfo:
+            case personalInfoUI:
                 const formValues = {
                     nameVal: nameRef.current!.value,
                     emailVal: emailRef.current!.value,
                     phoneVal: phoneRef.current!.value
                 }
-                if (validForm(formValues)) {
-                    dispatch(stepAction.personalInfo());
+                const formValidation = validForm(formValues);
+                if (!formValidation.validForm) {
+                    return setIsError(formValidation.errors);
                 }
-                return
-            case steps.plans:
-                return console.log('plans')
-            case steps.addOns:
-                return console.log('addons')
-            case steps.total:
-                return console.log('total')
+                return dispatch(stepAction.personalInfo());
+            case plansUI:
+                return console.log(steps)
+            case addOnsIU:
+                return console.log(steps)
+            case totalUI:
+                return console.log(steps)
             default:
                 break;
         }
     }
+
     return (
         <form onSubmit={submitHandler} className='flex flex-col justify-between gap-4'>
             <section className='px-4 items-center'>
                 <Card>
-                    {steps.personalInfo && <PersonalInfo nameRef={nameRef} emailRef={emailRef} phoneRef={phoneRef} />}
-                    {steps.plans && <Plans />}
-                    {steps.addOns && <AddOns />}
-                    {steps.total && <Total />}
-                    {steps.thankYou && <Thankyou />}
+                    {personalInfoUI && <PersonalInfo nameRef={nameRef} emailRef={emailRef} phoneRef={phoneRef} errors={isError} />}
+                    {plansUI && <Plans />}
+                    {addOnsIU && <AddOns />}
+                    {totalUI && <Total />}
+                    {thankYouUI && <Thankyou />}
                 </Card>
             </section>
             <Actions />

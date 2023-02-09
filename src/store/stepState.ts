@@ -25,16 +25,16 @@ const stepSlice = createSlice({
     initialState,
     reducers: {
         personalInfo(state) {
-            state.steps = { ...state.steps, personalInfo: false, plans: true }
+            state.steps = { ...state.steps, plans: true }
         },
         plans(state) {
-            state.steps = { ...state.steps, plans: false, addOns: true }
+            state.steps = { ...state.steps, addOns: true }
         },
         addOns(state) {
-            state.steps = { ...state.steps, addOns: false, total: true }
+            state.steps = { ...state.steps, total: true }
         },
         total(state) {
-            state.steps = { ...state.steps, total: false, thankYou: true }
+            state.steps = { ...state.steps, thankYou: true }
         },
     }
 });

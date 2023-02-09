@@ -3,7 +3,7 @@ type formInputs = {
     emailVal: string,
     phoneVal: string,
 }
-export const validForm = ({ nameVal, emailVal, phoneVal }: formInputs): boolean => {
+export const validForm = ({ nameVal, emailVal, phoneVal }: formInputs): { validForm: boolean, errors: string[] } => {
     let errors = []
     const emailRegex = (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(emailVal));
     if (nameVal.trim().length < 3) {
@@ -16,5 +16,5 @@ export const validForm = ({ nameVal, emailVal, phoneVal }: formInputs): boolean 
         errors.push('phone');
     }
     const validForm = errors.length === 0
-    return validForm
+    return { validForm, errors }
 }
