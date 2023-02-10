@@ -1,13 +1,14 @@
 import React from 'react'
 interface Props {
-    billing: 'yearly' | 'monthly',
+    yearly: boolean,
     total: number
 }
 const Total: React.FC<Props> = (props) => {
-    const total = `+$${props.total}/mo`;
+    const total = `+$${props.total}/${props.yearly ? 'yr' : 'mo'}`;
+    const totalMsg = `Total (${props.yearly ? 'per year' : 'per month'})`
     return (
         <div className='flex justify-between items-center w-full max-w-[22rem] m-auto'>
-            <p className='text-gray-500/80 text-lg'>Total (per month)</p>
+            <p className='text-gray-500/80 text-lg'>{totalMsg}</p>
             <span className='text-indigo-700 font-bold text-xl'>{total}</span>
         </div>
     )

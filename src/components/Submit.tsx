@@ -24,7 +24,7 @@ const Submit = () => {
     const plansUI = steps.personalInfo.active && steps.plans.active && !steps.addOns.active && !steps.total.active && !steps.thankYou;
     const addOnsIU = steps.personalInfo.active && steps.plans.active && steps.addOns.active && !steps.total.active && !steps.thankYou;
     const totalUI = steps.personalInfo.active && steps.plans.active && steps.addOns.active && steps.total.active && !steps.thankYou;
-    const thankYouUI = steps.personalInfo.active && !steps.plans.active && !steps.addOns.active && !steps.total.active && steps.thankYou;
+    const thankYouUI = steps.personalInfo.active && steps.plans.active && steps.addOns.active && steps.total.active && steps.thankYou;
 
     const nameRef = useRef<HTMLInputElement>(null)
     const emailRef = useRef<HTMLInputElement>(null)
@@ -62,7 +62,14 @@ const Submit = () => {
                 });
                 return dispatch(stepAction.addOns({ data: addOnsData }));
             case totalUI:
-                return
+                const totalAddons = steps.addOns.data.reduce((intialState, item) => {
+                    return intialState + item.price!;
+                }, 0);
+
+                const total = steps.plans.data.price! + totalAddons;
+                return dispatch(stepAction.total({ data: { total } }));
+            case thankYouUI:
+                console.log('Thanks');
             default:
                 break;
         }
