@@ -18,11 +18,12 @@ import { validForm } from './personal-info/Validation'
 const Submit = () => {
     // Display pages
     const { steps } = useAppSelector(state => state.stepReducer);
-    const personalInfoUI = steps.personalInfo && !steps.plans && !steps.addOns && !steps.total && !steps.thankYou;
-    const plansUI = steps.personalInfo && steps.plans && !steps.addOns && !steps.total && !steps.thankYou;
-    const addOnsIU = steps.personalInfo && steps.plans && steps.addOns && !steps.total && !steps.thankYou;
-    const totalUI = steps.personalInfo && steps.plans && steps.addOns && steps.total && !steps.thankYou;
-    const thankYouUI = steps.personalInfo && !steps.plans && !steps.addOns && !steps.total && steps.thankYou;
+    const { yearly, plans } = useAppSelector(state => state.planReducer);
+    const personalInfoUI = steps.personalInfo.active && !steps.plans.active && !steps.addOns.active && !steps.total.active && !steps.thankYou;
+    const plansUI = steps.personalInfo.active && steps.plans.active && !steps.addOns.active && !steps.total.active && !steps.thankYou;
+    const addOnsIU = steps.personalInfo.active && steps.plans.active && steps.addOns.active && !steps.total.active && !steps.thankYou;
+    const totalUI = steps.personalInfo.active && steps.plans.active && steps.addOns.active && steps.total.active && !steps.thankYou;
+    const thankYouUI = steps.personalInfo.active && !steps.plans.active && !steps.addOns.active && !steps.total.active && steps.thankYou;
 
     const nameRef = useRef<HTMLInputElement>(null)
     const emailRef = useRef<HTMLInputElement>(null)
@@ -44,13 +45,19 @@ const Submit = () => {
                 if (!formValidation.validForm) {
                     return setIsError(formValidation.errors);
                 }
-                return dispatch(stepAction.personalInfo());
+                return dispatch(stepAction.personalInfo(formValues));
             case plansUI:
-                return console.log(steps)
+                const planSelected = plans.find(plan => plan.selected);
+                const data = {
+                    plan: planSelected!.plan,
+                    price: planSelected!.price,
+                    yearly: yearly
+                }
+                return dispatch(stepAction.plans(data));
             case addOnsIU:
-                return console.log(steps)
+                return
             case totalUI:
-                return console.log(steps)
+                return
             default:
                 break;
         }
