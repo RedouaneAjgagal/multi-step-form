@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import { useState } from 'react'
 import Card from './UI/Card'
 // pages
 import { Index as PersonalInfo } from './personal-info/Index'
@@ -10,39 +10,38 @@ import { Index as Thankyou } from './thank-you/Index'
 import { useAppSelector, useAppDispatch } from '../assets/hooks/redux'
 import { stepAction } from '../store/stepState'
 import Actions from './actions/Index'
-// validation
-import { validForm } from './personal-info/Validation'
-import useCurrentStep from './steps/useCurrentStep'
 
-
+type errorType = {
+    name: boolean,
+    email: boolean,
+    phone: boolean
+}
 
 const Submit = () => {
     // Display pages
     const { steps } = useAppSelector(state => state.stepReducer);
     const { yearly, plans } = useAppSelector(state => state.planReducer);
     const { addOns } = useAppSelector(state => state.addOnsReducer);
+    const personalInfo = useAppSelector(state => state.personalInfoReducer);
 
-    const nameRef = useRef<HTMLInputElement>(null)
-    const emailRef = useRef<HTMLInputElement>(null)
-    const phoneRef = useRef<HTMLInputElement>(null)
-
-    const [isError, setIsError] = useState<string[]>([]);
+    const [errors, setErrors] = useState<errorType>({ name: false, email: false, phone: false });
 
     const dispatch = useAppDispatch();
     const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         switch (true) {
             case steps.currentStep === 1:
-                const formValues = {
-                    nameVal: nameRef.current!.value,
-                    emailVal: emailRef.current!.value,
-                    phoneVal: phoneRef.current!.value
+                const formErrors = Object.values(personalInfo.data).some(value => value.error);
+                if (formErrors) {
+                    const errorData = {
+                        name: personalInfo.data.name.error,
+                        email: personalInfo.data.email.error,
+                        phone: personalInfo.data.phone.error
+                    }
+                    return setErrors(errorData);
                 }
-                const formValidation = validForm(formValues);
-                if (!formValidation.validForm) {
-                    return setIsError(formValidation.errors);
-                }
-                return dispatch(stepAction.personalInfo({ data: formValues }));
+                setErrors({ name: false, email: false, phone: false });
+                return dispatch(stepAction.personalInfo({ data: personalInfo.data }));
             case steps.currentStep === 2:
                 const planSelected = plans.find(plan => plan.selected);
                 const planData = {
@@ -65,6 +64,7 @@ const Submit = () => {
                 const total = steps.plans.data.price! + totalAddons;
                 return dispatch(stepAction.total({ data: { total } }));
             default:
+
                 break;
         }
     }
@@ -72,7 +72,7 @@ const Submit = () => {
         <form onSubmit={submitHandler} className='flex flex-col justify-between gap-4'>
             <section className='px-4 items-center'>
                 <Card>
-                    {steps.currentStep === 1 && <PersonalInfo nameRef={nameRef} emailRef={emailRef} phoneRef={phoneRef} errors={isError} />}
+                    {steps.currentStep === 1 && <PersonalInfo errors={errors} />}
                     {steps.currentStep === 2 && <Plans />}
                     {steps.currentStep === 3 && <AddOns />}
                     {steps.currentStep === 4 && <Total />}

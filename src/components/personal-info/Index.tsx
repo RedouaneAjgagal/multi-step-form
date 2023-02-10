@@ -1,18 +1,21 @@
 import Form from './Form'
 import Header from '../UI/Header'
 import Wrapper from '../UI/Wrapper'
-import { refHanlder } from './Form'
 
 interface Props {
-    errors: string[]
+    errors: {
+        name: boolean,
+        email: boolean,
+        phone: boolean
+    }
 }
 
-export const Index: React.FC<refHanlder & Props> = (props) => {
+export const Index: React.FC<Props> = (props) => {
 
     return (
         <Wrapper>
             <Header title='Personal info' description='Please provide your name, email address, and phone number.' />
-            <Form emailRef={props.emailRef} nameRef={props.nameRef} phoneRef={props.phoneRef} errors={props.errors} />
+            <Form errors={props.errors} />
         </Wrapper>
     )
 }
