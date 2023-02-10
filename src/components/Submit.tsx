@@ -29,11 +29,10 @@ const Submit = () => {
     const [isError, setIsError] = useState<string[]>([]);
 
     const dispatch = useAppDispatch();
-    const { personalInfo: personalInfoUI, plans: plansUI, addOns: addOnsUI, total: totalUI, thankYou: thankYouUI } = useCurrentStep();
     const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         switch (true) {
-            case personalInfoUI:
+            case steps.currentStep === 1:
                 const formValues = {
                     nameVal: nameRef.current!.value,
                     emailVal: emailRef.current!.value,
@@ -44,7 +43,7 @@ const Submit = () => {
                     return setIsError(formValidation.errors);
                 }
                 return dispatch(stepAction.personalInfo({ data: formValues }));
-            case plansUI:
+            case steps.currentStep === 2:
                 const planSelected = plans.find(plan => plan.selected);
                 const planData = {
                     plan: planSelected!.plan,
@@ -52,13 +51,13 @@ const Submit = () => {
                     yearly: yearly
                 }
                 return dispatch(stepAction.plans({ data: planData }));
-            case addOnsUI:
+            case steps.currentStep === 3:
                 const selectedAddOns = addOns.filter(item => item.selected);
                 const addOnsData = selectedAddOns.map(item => {
                     return { addOn: item.addOn, price: yearly ? item.price * 10 : item.price }
                 });
                 return dispatch(stepAction.addOns({ data: addOnsData }));
-            case totalUI:
+            case steps.currentStep === 4:
                 const totalAddons = steps.addOns.data.reduce((intialState, item) => {
                     return intialState + item.price!;
                 }, 0);
@@ -73,14 +72,14 @@ const Submit = () => {
         <form onSubmit={submitHandler} className='flex flex-col justify-between gap-4'>
             <section className='px-4 items-center'>
                 <Card>
-                    {personalInfoUI && <PersonalInfo nameRef={nameRef} emailRef={emailRef} phoneRef={phoneRef} errors={isError} />}
-                    {plansUI && <Plans />}
-                    {addOnsUI && <AddOns />}
-                    {totalUI && <Total />}
-                    {thankYouUI && <Thankyou />}
+                    {steps.currentStep === 1 && <PersonalInfo nameRef={nameRef} emailRef={emailRef} phoneRef={phoneRef} errors={isError} />}
+                    {steps.currentStep === 2 && <Plans />}
+                    {steps.currentStep === 3 && <AddOns />}
+                    {steps.currentStep === 4 && <Total />}
+                    {steps.currentStep === 5 && <Thankyou />}
                 </Card>
             </section>
-            {!thankYouUI && <Actions hideGoBack={personalInfoUI} confirm={totalUI} />}
+            {steps.currentStep !== 5 && <Actions confirm={steps.currentStep === 4} />}
         </form>
     )
 }

@@ -1,8 +1,15 @@
-import React from 'react'
+import { useAppDispatch, useAppSelector } from "../../assets/hooks/redux"
+import { stepAction } from "../../store/stepState"
+
 
 const Back = () => {
+  const { steps } = useAppSelector(state => state.stepReducer)
+  const dispatch = useAppDispatch();
+  const goBackHandler = () => {
+    dispatch(stepAction.goBack());
+  }
   return (
-    <button className='font-medium text-gray-500/90 absolute left-4 bottom-5' type={'button'}>Go Back</button>
+    steps.currentStep === 1 ? null : <button onClick={goBackHandler} className='font-medium text-gray-500/90 absolute left-4 bottom-5' type={'button'}>Go Back</button>
   )
 }
 

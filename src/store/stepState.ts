@@ -18,7 +18,9 @@ type steps = {
             active: boolean,
             data: { total: number | null }
         },
-        thankYou: boolean
+        thankYou: boolean,
+        currentStep: number,
+        maxStep: number,
     },
 }
 
@@ -40,7 +42,9 @@ const initialState: steps = {
             active: false,
             data: { total: null }
         },
-        thankYou: false
+        thankYou: false,
+        currentStep: 1,
+        maxStep: 1
     }
 }
 
@@ -58,7 +62,8 @@ const stepSlice = createSlice({
                 plans: {
                     ...state.steps.plans,
                     active: true
-                }
+                },
+                currentStep: state.steps.currentStep + 1
             }
         },
         plans(state, action) {
@@ -71,7 +76,8 @@ const stepSlice = createSlice({
                 addOns: {
                     ...state.steps.addOns,
                     active: true
-                }
+                },
+                currentStep: state.steps.currentStep + 1
             }
         },
         addOns(state, action) {
@@ -84,7 +90,8 @@ const stepSlice = createSlice({
                 total: {
                     ...state.steps.total,
                     active: true
-                }
+                },
+                currentStep: state.steps.currentStep + 1
             }
         },
         total(state, action) {
@@ -94,9 +101,16 @@ const stepSlice = createSlice({
                     ...state.steps.total,
                     data: action.payload.data
                 },
-                thankYou: true
+                thankYou: true,
+                currentStep: state.steps.currentStep + 1
             }
         },
+        goBack(state) {
+            state.steps = {
+                ...state.steps,
+                currentStep: state.steps.currentStep - 1
+            }
+        }
     }
 });
 export const stepAction = stepSlice.actions;
