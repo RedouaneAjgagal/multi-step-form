@@ -19,6 +19,7 @@ const Submit = () => {
     // Display pages
     const { steps } = useAppSelector(state => state.stepReducer);
     const { yearly, plans } = useAppSelector(state => state.planReducer);
+    const { addOns } = useAppSelector(state => state.addOnsReducer);
     const personalInfoUI = steps.personalInfo.active && !steps.plans.active && !steps.addOns.active && !steps.total.active && !steps.thankYou;
     const plansUI = steps.personalInfo.active && steps.plans.active && !steps.addOns.active && !steps.total.active && !steps.thankYou;
     const addOnsIU = steps.personalInfo.active && steps.plans.active && steps.addOns.active && !steps.total.active && !steps.thankYou;
@@ -45,24 +46,28 @@ const Submit = () => {
                 if (!formValidation.validForm) {
                     return setIsError(formValidation.errors);
                 }
-                return dispatch(stepAction.personalInfo(formValues));
+                return dispatch(stepAction.personalInfo({ data: formValues }));
             case plansUI:
                 const planSelected = plans.find(plan => plan.selected);
-                const data = {
+                const planData = {
                     plan: planSelected!.plan,
                     price: planSelected!.price,
                     yearly: yearly
                 }
-                return dispatch(stepAction.plans(data));
+                return dispatch(stepAction.plans({ data: planData }));
             case addOnsIU:
-                return
+                const selectedAddOns = addOns.filter(item => item.selected);
+                const addOnsData = selectedAddOns.map(item => {
+                    return { addOn: item.addOn, price: yearly ? item.price * 10 : item.price }
+                });
+                return dispatch(stepAction.addOns({ data: addOnsData }));
             case totalUI:
                 return
             default:
                 break;
         }
     }
-
+    console.log(steps)
     return (
         <form onSubmit={submitHandler} className='flex flex-col justify-between gap-4'>
             <section className='px-4 items-center'>
