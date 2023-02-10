@@ -86,7 +86,7 @@ const Submit = () => {
                     {thankYouUI && <Thankyou />}
                 </Card>
             </section>
-            <Actions />
+            {!thankYouUI && <Actions hideGoBack={personalInfoUI} confirm={totalUI} />}
         </form>
     )
 }

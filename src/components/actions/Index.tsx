@@ -2,11 +2,16 @@ import React from 'react'
 import Next from './Next'
 import Back from './Back'
 
-const Index = () => {
+interface Props {
+  hideGoBack: boolean;
+  confirm: boolean;
+}
+
+const Index: React.FC<Props> = (props) => {
   return (
-    <div className='flex justify-between py-6 px-4 bg-white'>
-      <Back />
-      <Next />
+    <div className='py-8 bg-white relative'>
+      {props.hideGoBack ? null : <Back />}
+      <Next confirm={props.confirm} />
     </div>
   )
 }
