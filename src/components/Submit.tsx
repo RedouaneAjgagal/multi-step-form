@@ -12,6 +12,7 @@ import { stepAction } from '../store/stepState'
 import Actions from './actions/Index'
 // validation
 import { validForm } from './personal-info/Validation'
+import useCurrentStep from './steps/useCurrentStep'
 
 
 
@@ -20,11 +21,6 @@ const Submit = () => {
     const { steps } = useAppSelector(state => state.stepReducer);
     const { yearly, plans } = useAppSelector(state => state.planReducer);
     const { addOns } = useAppSelector(state => state.addOnsReducer);
-    const personalInfoUI = steps.personalInfo.active && !steps.plans.active && !steps.addOns.active && !steps.total.active && !steps.thankYou;
-    const plansUI = steps.personalInfo.active && steps.plans.active && !steps.addOns.active && !steps.total.active && !steps.thankYou;
-    const addOnsIU = steps.personalInfo.active && steps.plans.active && steps.addOns.active && !steps.total.active && !steps.thankYou;
-    const totalUI = steps.personalInfo.active && steps.plans.active && steps.addOns.active && steps.total.active && !steps.thankYou;
-    const thankYouUI = steps.personalInfo.active && steps.plans.active && steps.addOns.active && steps.total.active && steps.thankYou;
 
     const nameRef = useRef<HTMLInputElement>(null)
     const emailRef = useRef<HTMLInputElement>(null)
@@ -33,6 +29,7 @@ const Submit = () => {
     const [isError, setIsError] = useState<string[]>([]);
 
     const dispatch = useAppDispatch();
+    const { personalInfo: personalInfoUI, plans: plansUI, addOns: addOnsUI, total: totalUI, thankYou: thankYouUI } = useCurrentStep();
     const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         switch (true) {
@@ -55,7 +52,7 @@ const Submit = () => {
                     yearly: yearly
                 }
                 return dispatch(stepAction.plans({ data: planData }));
-            case addOnsIU:
+            case addOnsUI:
                 const selectedAddOns = addOns.filter(item => item.selected);
                 const addOnsData = selectedAddOns.map(item => {
                     return { addOn: item.addOn, price: yearly ? item.price * 10 : item.price }
@@ -68,20 +65,17 @@ const Submit = () => {
 
                 const total = steps.plans.data.price! + totalAddons;
                 return dispatch(stepAction.total({ data: { total } }));
-            case thankYouUI:
-                console.log('Thanks');
             default:
                 break;
         }
     }
-    console.log(steps)
     return (
         <form onSubmit={submitHandler} className='flex flex-col justify-between gap-4'>
             <section className='px-4 items-center'>
                 <Card>
                     {personalInfoUI && <PersonalInfo nameRef={nameRef} emailRef={emailRef} phoneRef={phoneRef} errors={isError} />}
                     {plansUI && <Plans />}
-                    {addOnsIU && <AddOns />}
+                    {addOnsUI && <AddOns />}
                     {totalUI && <Total />}
                     {thankYouUI && <Thankyou />}
                 </Card>
