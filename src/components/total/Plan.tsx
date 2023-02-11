@@ -1,4 +1,6 @@
 import React from 'react'
+import { useAppDispatch } from '../../assets/hooks/redux'
+import { stepAction } from '../../store/stepState'
 
 interface Props {
     plan: string,
@@ -9,11 +11,15 @@ interface Props {
 const Plan: React.FC<Props> = (props) => {
     const price = `$${props.price}/mo`
     const plan = `${props.plan} (${props.billing})`
+    const dipatch = useAppDispatch()
+    const changePlanHandler = () => {
+        dipatch(stepAction.navigate({ allowed: true, navigate: 2}));
+    }
     return (
         <div className='flex justify-between items-center border-b pb-4'>
             <div>
                 <h4 className='font-bold text-lg'>{plan}</h4>
-                <button className='underline text-gray-500/80'>Chnage</button>
+                <button onClick={changePlanHandler} className='underline text-gray-500/80'>Chnage</button>
             </div>
             <div>
                 <span className='font-bold text-lg'>{price}</span>
