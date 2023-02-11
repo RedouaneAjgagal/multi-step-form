@@ -69,8 +69,8 @@ const Submit = () => {
         }
     }
     return (
-        <form onSubmit={submitHandler} className='flex flex-col justify-between gap-4 h-full min-h-screen'>
-            <section className='px-4 items-center relative z-10 mt-32'>
+        <form onSubmit={submitHandler} className='flex flex-col justify-between gap-4 h-full min-h-screen md:col-span-2 md:min-h-0'>
+            <section className='px-4 items-center relative z-10 mt-32 md:mt-0'>
                 <Card>
                     {steps.currentStep === 1 && <PersonalInfo errors={errors} />}
                     {steps.currentStep === 2 && <Plans />}
