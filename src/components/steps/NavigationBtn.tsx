@@ -29,8 +29,8 @@ const NavigationBtn: React.FC<Props> = (props) => {
                 {props.currentStep}
             </span>
             <span className='hidden md:flex md:flex-col md:items-start'>
-                <p className='text-slate-200/80'>{`Step ${props.currentStep}`}</p>
-                <h2 className='font-medium uppercase text-white'>{props.title}</h2>
+                <span className='text-slate-200/80'>{`Step ${props.currentStep}`}</span>
+                <span className='font-medium uppercase text-white'>{props.title}</span>
             </span>
         </button>
     )
