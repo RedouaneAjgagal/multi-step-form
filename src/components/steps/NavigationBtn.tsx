@@ -28,10 +28,10 @@ const NavigationBtn: React.FC<Props> = (props) => {
             <span className={`rounded-full h-10 w-10 border border-teal-100 font-medium ease-in-out duration-300 ${(steps.currentStep === props.currentStep || (props.currentStep === 4 && steps.currentStep === 5)) ? 'bg-teal-100 text-slate-900' : 'text-white'} flex justify-center items-center`}>
                 {props.currentStep}
             </span>
-            <div className='hidden md:flex md:flex-col md:items-start'>
+            <span className='hidden md:flex md:flex-col md:items-start'>
                 <p className='text-slate-200/80'>{`Step ${props.currentStep}`}</p>
                 <h2 className='font-medium uppercase text-white'>{props.title}</h2>
-            </div>
+            </span>
         </button>
     )
 }
