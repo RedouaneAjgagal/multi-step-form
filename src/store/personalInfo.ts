@@ -5,17 +5,14 @@ type values = {
         name: {
             value: null | string,
             error: boolean,
-            touched: boolean
         },
         email: {
             value: null | string,
             error: boolean,
-            touched: boolean
         },
         phone: {
             value: null | number,
             error: boolean,
-            touched: boolean
         },
     },
 }
@@ -25,17 +22,14 @@ const initialState: values = {
         name: {
             value: null,
             error: true,
-            touched: false
         },
         email: {
             value: null,
             error: true,
-            touched: false
         },
         phone: {
             value: null,
             error: true,
-            touched: false
         }
     }
 }
@@ -45,7 +39,6 @@ const personalInfoSlice = createSlice({
     initialState,
     reducers: {
         name(state, action) {
-            state.data.name.touched = true;
             if (action.payload.name.trim().length < 2) {
                 state.data.name.error = true;
             } else {
@@ -53,7 +46,6 @@ const personalInfoSlice = createSlice({
             }
         },
         email(state, action) {
-            state.data.email.touched = true;
             const validEmail = (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(action.payload.email));
             if (!validEmail) {
                 state.data.email.error = true;
@@ -62,7 +54,6 @@ const personalInfoSlice = createSlice({
             }
         },
         phone(state, action) {
-            state.data.phone.touched = true
             const phoneValue = action.payload.phone
             if (phoneValue.toString().trim().length < 7) {
                 state.data.phone.error = true;

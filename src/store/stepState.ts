@@ -110,8 +110,14 @@ const stepSlice = createSlice({
                 ...state.steps,
                 currentStep: state.steps.currentStep - 1
             }
+        },
+        navigate(state, action) {
+            if (action.payload.allowed) {
+                state.steps = {...state.steps, currentStep: action.payload.navigate}
+            }
         }
     }
 });
+
 export const stepAction = stepSlice.actions;
 export default stepSlice.reducer; 
