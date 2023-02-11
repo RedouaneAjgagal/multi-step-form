@@ -7,7 +7,7 @@ import { Index as AddOns } from './add-ons/Index'
 import { Index as Total } from './total/Index'
 import { Index as Thankyou } from './thank-you/Index'
 // redux
-import { useAppSelector, useAppDispatch } from '../assets/hooks/redux'
+import { useAppSelector, useAppDispatch } from '../hooks/redux'
 import { stepAction } from '../store/stepState'
 import Actions from './actions/Index'
 

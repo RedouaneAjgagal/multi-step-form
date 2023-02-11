@@ -1,7 +1,7 @@
 import Header from '../UI/Header'
 import AddOn from './AddOn'
 import Wrapper from '../UI/Wrapper'
-import { useAppSelector } from '../../assets/hooks/redux'
+import { useAppSelector } from '../../hooks/redux'
 
 export const Index = () => {
   const { addOns } = useAppSelector(state => state.addOnsReducer);

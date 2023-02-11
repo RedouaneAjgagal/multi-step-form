@@ -1,5 +1,5 @@
 import React from 'react'
-import { useAppDispatch } from '../../assets/hooks/redux'
+import { useAppDispatch } from '../../hooks/redux'
 import { stepAction } from '../../store/stepState'
 
 interface Props {

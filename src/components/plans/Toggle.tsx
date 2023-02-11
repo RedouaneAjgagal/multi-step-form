@@ -1,4 +1,4 @@
-import { useAppDispatch } from "../../assets/hooks/redux";
+import { useAppDispatch } from "../../hooks/redux";
 import { planAction } from "../../store/plans";
 
 interface Props {

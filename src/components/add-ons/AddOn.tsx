@@ -1,6 +1,6 @@
 import React from 'react'
 import { addOnAction } from '../../store/addOns'
-import { useAppDispatch } from '../../assets/hooks/redux'
+import { useAppDispatch } from '../../hooks/redux'
 
 interface Props {
     id: string,

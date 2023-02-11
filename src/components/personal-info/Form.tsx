@@ -1,4 +1,4 @@
-import { useAppDispatch, useAppSelector } from "../../assets/hooks/redux";
+import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import { infoAction } from "../../store/personalInfo";
 
 interface Props {

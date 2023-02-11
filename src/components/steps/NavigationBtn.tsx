@@ -1,5 +1,5 @@
 import React from 'react'
-import { useAppSelector, useAppDispatch } from '../../assets/hooks/redux'
+import { useAppSelector, useAppDispatch } from '../../hooks/redux'
 import { stepAction } from '../../store/stepState'
 interface Props {
     currentStep: number,

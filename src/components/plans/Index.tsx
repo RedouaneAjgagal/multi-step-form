@@ -2,7 +2,7 @@ import Header from '../UI/Header'
 import Plan from './Plan'
 import Toggle from './Toggle'
 import Wrapper from '../UI/Wrapper'
-import { useAppSelector } from '../../assets/hooks/redux'
+import { useAppSelector } from '../../hooks/redux'
 
 export const Index = () => {
     const { yearly, plans } = useAppSelector(state => state.planReducer)
