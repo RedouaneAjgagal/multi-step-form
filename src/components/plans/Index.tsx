@@ -9,7 +9,7 @@ export const Index = () => {
     return (
         <Wrapper>
             <Header title='Select your plan' description='You have option of monthly or yearly billing' />
-            <div className='flex flex-col gap-4'>
+            <div className='flex flex-col gap-4 md:grid md:grid-cols-3'>
                 {plans.map(item => <Plan key={item.plan} plan={item.plan} price={item.price} icon={item.icon} yearly={yearly} selected={item.selected} />)}
             </div>
             <Toggle yearly={yearly} />

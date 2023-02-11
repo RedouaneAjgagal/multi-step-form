@@ -9,7 +9,7 @@ const Back = () => {
     dispatch(stepAction.goBack());
   }
   return (
-    steps.currentStep === 1 ? null : <button onClick={goBackHandler} className='font-medium text-gray-500/90 absolute left-4 bottom-5' type={'button'}>Go Back</button>
+    steps.currentStep === 1 ? null : <button onClick={goBackHandler} className='font-medium text-gray-500/90 absolute left-4 bottom-5 md:left-10' type={'button'}>Go Back</button>
   )
 }
 

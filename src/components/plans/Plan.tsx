@@ -16,7 +16,7 @@ const Plan: React.FC<Props> = (props) => {
         dispatch(planAction.selectPlan({ plan: props.plan }))
     }
     return (
-        <label htmlFor={props.plan} className={`flex items-center gap-5 p-4 rounded-xl border border-blue-700/20 cursor-pointer ${props.selected && 'border-blue-700 bg-blue-100/25'}`}>
+        <label htmlFor={props.plan} className={`flex items-center gap-5 p-4 rounded-xl border border-blue-700/20 cursor-pointer ${props.selected && 'border-blue-700 bg-blue-100/25'} md:flex-col md:items-start md:py-8`}>
             <input onClick={selectPlanHandler} type='radio' id={props.plan} name={props.plan} className='sr-only' />
             <div>
                 <img src={props.icon} alt={`${props.plan} icon`} />
