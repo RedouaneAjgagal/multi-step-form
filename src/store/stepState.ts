@@ -19,8 +19,7 @@ type steps = {
             data: { total: number | null }
         },
         thankYou: boolean,
-        currentStep: number,
-        maxStep: number,
+        currentStep: number
     },
 }
 
@@ -43,8 +42,7 @@ const initialState: steps = {
             data: { total: null }
         },
         thankYou: false,
-        currentStep: 1,
-        maxStep: 1
+        currentStep: 1
     }
 }
 

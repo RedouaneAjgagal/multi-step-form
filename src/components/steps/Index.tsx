@@ -9,8 +9,8 @@ export const Index = () => {
         { currentStep: 4, title: 'Summary' }
     ]
     return (
-        <div className={`bg-[url('./assets/images/bg-sidebar-mobile.svg')] bg-no-repeat bg-cover flex justify-center absolute h-[14rem] w-full md:static md:min-h-full md:h-auto md:rounded-xl md:justify-start md:items-start md:p-8 md:bg-[url('./assets/images/bg-sidebar-desktop.svg')] md:bg-bottom`}>
-            <div className='flex gap-5 mb-16 items-center md:flex-col md:items-start'>
+        <div className={`bg-[url('./assets/images/bg-sidebar-mobile.svg')] bg-no-repeat bg-cover flex justify-center absolute h-[14rem] w-full md:static md:min-h-full md:h-auto md:rounded-xl md:justify-start md:items-start md:py-8 px-6 md:bg-[url('./assets/images/bg-sidebar-desktop.svg')] md:bg-bottom`}>
+            <div className='flex gap-5 mb-16 items-center md:flex-col md:items-start md:w-full'>
                 {navigationBtns.map(btn => <NavigationBtn key={btn.currentStep} currentStep={btn.currentStep} title={btn.title} />)}
             </div>
         </div>
