@@ -10,7 +10,7 @@ export const Index = () => {
         { currentStep: 4 },
     ]
     return (
-        <div style={{ backgroundImage: `url(${sidebarMobile})` }} className='bg-no-repeat bg-cover flex h-full min-h-[14rem] justify-center'>
+        <div style={{ backgroundImage: `url(${sidebarMobile})` }} className='bg-no-repeat bg-cover flex justify-center absolute h-[14rem] w-full'>
             <div className='flex gap-5 mb-16 items-center'>
                 {navigationBtns.map(btn => <NavigationBtn key={btn.currentStep} currentStep={btn.currentStep} />)}
             </div>

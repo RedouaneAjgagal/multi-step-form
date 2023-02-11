@@ -6,7 +6,7 @@ import Submit from './Submit'
 
 const PageContainer = () => {
     return (
-        <div className=' flex flex-col gap-4 justify-between min-h-screen'>
+        <div className='flex flex-col gap-4 min-h-screen'>
             <Steps />
             <Submit />
         </div>

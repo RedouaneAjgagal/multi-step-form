@@ -9,7 +9,7 @@ interface Props {
 }
 
 const Plan: React.FC<Props> = (props) => {
-    const price = `$${props.price}/mo`
+    const price = `$${props.price}/${props.billing === 'yearly' ? 'yr' : 'mo'}`
     const plan = `${props.plan} (${props.billing})`
     const dipatch = useAppDispatch()
     const changePlanHandler = () => {

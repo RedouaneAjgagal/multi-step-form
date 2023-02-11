@@ -23,14 +23,14 @@ const AddOn: React.FC<Props> = (props) => {
     }
 
     return (
-        <label htmlFor={props.id} className={`flex items-center justify-between p-4  rounded-lg cursor-pointer ${props.selected ? 'border border-indigo-700 bg-indigo-100/25' : 'border border-indigo-500/20'}`}>
-            <div className='flex gap-6 items-center relative'>
+        <label htmlFor={props.id} className={`flex items-center justify-between p-3  rounded-lg cursor-pointer ${props.selected ? 'border border-indigo-700 bg-indigo-100/25' : 'border border-indigo-500/20'}`}>
+            <div className='flex gap-3 items-center relative'>
                 <div className='flex'>
                     <input onChange={selectAddOnsHandler} type="checkbox" name="service" id={props.id} className='w-6 h-6 cursor-pointer accent-indigo-700/70' checked={props.selected ? true : false} />
                 </div>
                 <div className='flex flex-col items-start select-none'>
                     <h4 className='font-bold'>{props.addOn}</h4>
-                    <p className='text-gray-500/80'>{props.details}</p>
+                    <p className='text-gray-500/80 text-sm'>{props.details}</p>
                 </div>
             </div>
             <div>
