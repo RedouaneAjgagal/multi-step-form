@@ -10,7 +10,7 @@ export const Index = () => {
             <h1 className='text-3xl font-bold'>Thank you!</h1>
             <div className='text-gray-500/80 text-lg md:max-w-[80%]'>
                 <p>Thanks for confirming your subscription!</p>
-                <p>We home you have fun using our platform. if you ever need support, please feel free to email us at</p>
+                <p>We hope you have fun using our platform. if you ever need support, please feel free to email us at</p>
                 <p>support@loremgaming.com</p>
             </div>
         </div>
